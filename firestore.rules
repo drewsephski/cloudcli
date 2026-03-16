@@ -1,0 +1,77 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+    
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    
+    function isAdmin() {
+      return isAuthenticated() &&
+        (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin' ||
+          (request.auth.token.email == "novaraeex@gmail.com" && request.auth.token.email_verified == true));
+    }
+    
+    function isValidEmail(email) {
+      return email is string && email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+    }
+    
+    function isValidUrl(url) {
+      return url is string && (url.matches("^https://.*") || url.matches("^http://.*"));
+    }
+
+    function isValidUser(data) {
+      let hasRequired = data.keys().hasAll(['uid', 'email', 'role', 'createdAt']);
+      let validUid = data.uid is string && data.uid.size() > 0;
+      let validEmail = isValidEmail(data.email);
+      let validRole = data.role in ['admin', 'member'];
+      let validName = !('name' in data) || (data.name is string && data.name.size() <= 100);
+      let validPhoto = !('photoURL' in data) || isValidUrl(data.photoURL);
+      let validStripe = !('stripeCustomerId' in data) || data.stripeCustomerId is string;
+      let validSubStatus = !('subscriptionStatus' in data) || data.subscriptionStatus in ['active', 'canceled', 'past_due', 'unpaid', 'incomplete', 'incomplete_expired', 'trialing', 'none'];
+      let validSubPrice = !('subscriptionPriceId' in data) || data.subscriptionPriceId is string;
+      
+      return hasRequired && validUid && validEmail && validRole && validName && validPhoto && validStripe && validSubStatus && validSubPrice;
+    }
+    
+    // ===============================================================
+    // Rules
+    // ===============================================================
+
+    match /users/{userId} {
+      // Users can read their own profile. Admins can read all profiles.
+      allow read: if isOwner(userId) || isAdmin();
+      
+      // Users can create their own profile. Role must be 'member' unless they are an admin.
+      allow create: if isOwner(userId) && isValidUser(request.resource.data) && 
+        request.resource.data.uid == userId &&
+        (request.resource.data.role == 'member' || isAdmin());
+        
+      // Users can update their own profile, but cannot change their role, stripe data, or uid.
+      // Admins can update any profile and change roles.
+      allow update: if (isOwner(userId) || isAdmin()) && isValidUser(request.resource.data) &&
+        request.resource.data.uid == resource.data.uid &&
+        request.resource.data.createdAt == resource.data.createdAt &&
+        (
+          isAdmin() || 
+          (
+            request.resource.data.role == resource.data.role &&
+            request.resource.data.get('stripeCustomerId', '') == resource.data.get('stripeCustomerId', '') &&
+            request.resource.data.get('subscriptionStatus', '') == resource.data.get('subscriptionStatus', '') &&
+            request.resource.data.get('subscriptionPriceId', '') == resource.data.get('subscriptionPriceId', '')
+          )
+        );
+        
+      allow delete: if isAdmin();
+    }
+  }
+}

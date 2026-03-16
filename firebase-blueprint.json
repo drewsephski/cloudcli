@@ -1,0 +1,61 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Stores user profile information, role, and subscription status.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "Firebase Auth UID"
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "name": {
+          "type": "string"
+        },
+        "photoURL": {
+          "type": "string",
+          "format": "uri"
+        },
+        "role": {
+          "type": "string",
+          "enum": ["admin", "member"],
+          "description": "Role-based access control"
+        },
+        "stripeCustomerId": {
+          "type": "string",
+          "description": "Stripe Customer ID"
+        },
+        "subscriptionStatus": {
+          "type": "string",
+          "enum": ["active", "canceled", "past_due", "unpaid", "incomplete", "incomplete_expired", "trialing", "none"],
+          "description": "Stripe Subscription Status"
+        },
+        "subscriptionPriceId": {
+          "type": "string",
+          "description": "Stripe Price ID for the active subscription"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["uid", "email", "role", "createdAt"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": {
+        "$ref": "#/entities/UserProfile"
+      },
+      "description": "User profiles collection"
+    }
+  }
+}
