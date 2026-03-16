@@ -1,20 +1,93 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# ☁️ CloudCLI — Personal AI Assistant (Simplified)
 
-# Run and deploy your AI Studio app
+CloudCLI is a **lightweight, easier-to-maintain alternative** to OpenClaw. Get a personal AI assistant running on your devices with minimal setup and maximum simplicity.
 
-This contains everything you need to run your app locally.
+## Why CloudCLI?
 
-View your app in AI Studio: https://ai.studio/apps/de5fb83a-4b10-41c3-9d5f-e6245bea436e
+- **⚡ Simple Setup** — Get started in minutes, not hours
+- **🛠️ Easy Maintenance** — Less complexity, fewer dependencies
+- **📱 Multi-Channel** — WhatsApp, Telegram, Slack, Discord, and more
+- **🚀 Fast** — Streamlined and optimized for quick deployment
+- **🔒 Your Data** — Runs locally on your devices
 
-## Run Locally
+## Quick Start
 
-**Prerequisites:**  Node.js
+**Prerequisites:** Node.js ≥ 20
 
+```bash
+# 1. Clone and install
+git clone https://github.com/drewsephski/cloudcli.git
+cd cloudcli
+npm install
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+# 2. Set your API key
+cp .env.example .env.local
+# Add your GEMINI_API_KEY to .env.local
+
+# 3. Run
+npm run dev
+```
+
+Done! Your AI assistant is ready.
+
+## Features
+
+- **Local-First** — Your Gateway runs on your machine by default
+- **Multi-Channel Support** — Connect WhatsApp, Telegram, Slack, Discord, Signal, and more
+- **Simple CLI** — Straightforward commands without the overhead
+- **Voice & Chat** — Talk to your assistant across your favorite platforms
+- **Lightweight** — No bloat, just what you need
+
+## Commands
+
+```bash
+cloudcli start          # Start the gateway
+cloudcli send           # Send a message to a channel
+cloudcli agent          # Talk to your AI assistant
+cloudcli config         # Configure channels & settings
+```
+
+## Configuration
+
+Minimal `~/.cloudcli/config.json`:
+
+```json
+{
+  "model": "gemini-pro",
+  "channels": {
+    "telegram": { "botToken": "YOUR_TOKEN" },
+    "discord": { "token": "YOUR_TOKEN" }
+  }
+}
+```
+
+[Full config reference](https://docs.cloudcli.ai/config)
+
+## Development
+
+```bash
+# Dev mode (auto-reload)
+npm run dev
+
+# Build
+npm run build
+
+# Test
+npm run test
+```
+
+## Security
+
+- DM pairing required by default — only allowlisted senders can reach your assistant
+- All conversations stay on your device
+- [Security guide](https://docs.cloudcli.ai/security)
+
+## Community
+
+Contributions welcome! See [CONTRIBUTING.md](CONTRIBUTING.md)
+
+Questions? [Join our Discord](https://discord.gg/cloudcli) or [open an issue](https://github.com/drewsephski/cloudcli/issues)
+
+---
+
+Built for people who want their AI assistant without the complexity. 🚀
