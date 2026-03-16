@@ -33,48 +33,9 @@ Done! Your AI assistant is ready.
 ## Features
 
 - **Local-First** — Your Gateway runs on your machine by default
-- **Multi-Channel Support** — Connect WhatsApp, Telegram, Slack, Discord, Signal, and more
 - **Simple CLI** — Straightforward commands without the overhead
 - **Voice & Chat** — Talk to your assistant across your favorite platforms
 - **Lightweight** — No bloat, just what you need
-
-## Commands
-
-```bash
-cloudcli start          # Start the gateway
-cloudcli send           # Send a message to a channel
-cloudcli agent          # Talk to your AI assistant
-cloudcli config         # Configure channels & settings
-```
-
-## Configuration
-
-Minimal `~/.cloudcli/config.json`:
-
-```json
-{
-  "model": "gemini-pro",
-  "channels": {
-    "telegram": { "botToken": "YOUR_TOKEN" },
-    "discord": { "token": "YOUR_TOKEN" }
-  }
-}
-```
-
-[Full config reference](https://docs.cloudcli.ai/config)
-
-## Development
-
-```bash
-# Dev mode (auto-reload)
-npm run dev
-
-# Build
-npm run build
-
-# Test
-npm run test
-```
 
 ## Security
 
