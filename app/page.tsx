@@ -1,5 +1,7 @@
 import { Navbar } from "@/components/navbar"
 import { Hero } from "@/components/hero"
+import { OpenClawBanner } from "@/components/openclaw-banner"
+import { OpenClawPage } from "@/components/openclaw-page"
 import { Integrations } from "@/components/integrations"
 import { HowItWorks } from "@/components/how-it-works"
 import { Features } from "@/components/features"
@@ -13,6 +15,8 @@ export default function Home() {
       <Navbar />
       <main className="flex-1">
         <Hero />
+        <OpenClawBanner />
+        <OpenClawPage />
         <Integrations />
         <HowItWorks />
         <Features />

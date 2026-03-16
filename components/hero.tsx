@@ -20,7 +20,7 @@ export function Hero() {
         >
           <Badge variant="secondary" className="px-3 py-1 text-sm font-normal border-primary/20 bg-primary/5 text-primary">
             <ShieldCheck className="mr-2 h-3 w-3" />
-            Enterprise Ready | SOC2 Compliant
+            Enterprise Ready | OpenClaw Native
           </Badge>
         </motion.div>
         
