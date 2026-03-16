@@ -4,250 +4,266 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "motion/react"
 import { Badge } from "./ui/badge"
 import { Button } from "./ui/button"
-import { ArrowRight, Smartphone, Terminal, Lock, Globe, ShieldCheck, Monitor, Layout, Play, CheckCircle2 } from "lucide-react"
+import {
+  ArrowRight, Smartphone, Terminal, Lock, Globe,
+  ShieldCheck, Layout, Play, CheckCircle2,
+} from "lucide-react"
 import Link from "next/link"
 
+type Tab = "mobile" | "web" | "ide"
+
 export function Hero() {
-  const [activeTab, setActiveTab] = useState<"mobile" | "web" | "ide">("mobile")
+  const [activeTab, setActiveTab] = useState<Tab>("mobile")
 
   return (
-    <section className="container mx-auto max-w-screen-xl px-4 pt-24 pb-16 text-center md:pt-32 md:pb-24">
-      <div className="mx-auto flex max-w-[800px] flex-col items-center gap-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Badge variant="secondary" className="px-3 py-1 text-sm font-normal border-primary/20 bg-primary/5 text-primary">
-            <ShieldCheck className="mr-2 h-3 w-3" />
-            Enterprise Ready | OpenClaw Native
+    <section
+      className="container mx-auto max-w-screen-xl px-5 pb-20 pt-24 text-center md:pb-28 md:pt-32"
+      style={{ fontFamily: "'DM Sans', sans-serif" }}
+    >
+      <div className="mx-auto flex max-w-[760px] flex-col items-center gap-5">
+
+        {/* Badge */}
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.38 }}>
+          <Badge className="gap-2 rounded-md border border-blue-500/20 bg-blue-500/8 px-2.5 py-1 text-[11px] font-normal text-blue-300">
+            <ShieldCheck className="h-3 w-3" />
+            Enterprise Ready · OpenClaw Native
           </Badge>
         </motion.div>
-        
-        <motion.h1 
-          className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
+
+        {/* Headline */}
+        <motion.h1
+          className="font-syne text-[2.25rem] font-extrabold leading-[1.06] tracking-[-0.035em] sm:text-5xl md:text-[3.5rem]"
+          style={{ color: "#f8fafc" }}
+          initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.38, delay: 0.07 }}
         >
-          Code from anywhere. <br className="hidden sm:block" />
-          <span className="bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent">Even your phone.</span>
+          Code from anywhere.{" "}
+          <span className="bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">
+            Even your phone.
+          </span>
         </motion.h1>
-        
-        <motion.p 
-          className="max-w-[600px] text-lg text-muted-foreground sm:text-xl"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+
+        {/* Sub */}
+        <motion.p
+          className="max-w-[540px] text-[1rem] leading-relaxed"
+          style={{ color: "#94a3b8" }}
+          initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.38, delay: 0.13 }}
         >
-          Secure, scalable cloud environments for your engineering team. Run Claude Code, Cursor & Codex seamlessly across any device.
+          Secure, scalable cloud environments for your engineering team.
+          Run Claude Code, Cursor &amp; Codex seamlessly across any device.
         </motion.p>
 
-        <motion.div 
-          className="flex flex-wrap items-center justify-center gap-3 text-sm text-muted-foreground"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
+        {/* Trust pills */}
+        <motion.div
+          className="flex flex-wrap items-center justify-center gap-2"
+          initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.38, delay: 0.18 }}
         >
-          <div className="flex items-center gap-1.5 rounded-full border border-border/50 bg-secondary/30 px-3 py-1.5 shadow-sm">
-            <CheckCircle2 className="h-3.5 w-3.5 text-primary" /> Zero Trust Security
-          </div>
-          <div className="flex items-center gap-1.5 rounded-full border border-border/50 bg-secondary/30 px-3 py-1.5 shadow-sm">
-            <Lock className="h-3.5 w-3.5 text-primary" /> Persistent Sessions
-          </div>
-          <div className="flex items-center gap-1.5 rounded-full border border-border/50 bg-secondary/30 px-3 py-1.5 shadow-sm">
-            <Globe className="h-3.5 w-3.5 text-primary" /> Global Edge Network
-          </div>
+          {[
+            { icon: <CheckCircle2 className="h-3 w-3 text-blue-400" />, label: "Zero Trust Security" },
+            { icon: <Lock        className="h-3 w-3 text-blue-400" />, label: "Persistent Sessions" },
+            { icon: <Globe       className="h-3 w-3 text-blue-400" />, label: "Global Edge Network" },
+          ].map(({ icon, label }) => (
+            <div key={label}
+              className="flex items-center gap-1.5 rounded-md border border-white/[0.07] bg-white/[0.025] px-2.5 py-1.5 text-xs"
+              style={{ color: "#64748b" }}>
+              {icon}{label}
+            </div>
+          ))}
         </motion.div>
 
-        <motion.div 
-          className="flex flex-col gap-4 sm:flex-row sm:items-center mt-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
+        {/* CTAs */}
+        <motion.div
+          className="mt-2 flex flex-col items-center gap-3 sm:flex-row"
+          initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.38, delay: 0.23 }}
         >
           <Link href="/auth">
-            <Button size="lg" className="gap-2 rounded-full px-8 shadow-lg shadow-primary/25 transition-all hover:shadow-primary/40 hover:-translate-y-0.5">
+            <Button size="lg"
+              className="gap-2 rounded-md border-0 px-7 text-sm font-medium text-white transition-opacity hover:opacity-90"
+              style={{ background: "linear-gradient(135deg,#2563eb,#4f46e5)" }}>
               Start building <ArrowRight className="h-4 w-4" />
             </Button>
           </Link>
-          <Button size="lg" variant="outline" className="gap-2 rounded-full px-8 border-border/60 hover:bg-secondary/50">
-            <Play className="h-4 w-4" /> Book a Demo
+          <Button size="lg" variant="ghost"
+            className="gap-2 rounded-md border border-white/[0.08] px-7 text-sm transition-colors hover:border-white/[0.14] hover:bg-white/[0.03]"
+            style={{ color: "#94a3b8" }}>
+            <Play className="h-3.5 w-3.5" />Book a Demo
           </Button>
         </motion.div>
       </div>
 
-      <motion.div 
-        className="mx-auto mt-20 max-w-[900px] overflow-hidden rounded-xl border border-border/60 bg-card shadow-2xl shadow-black/50 text-left"
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.5 }}
+      {/* ── Interactive preview ── */}
+      <motion.div
+        className="mx-auto mt-16 max-w-[860px] overflow-hidden rounded-xl border text-left shadow-2xl"
+        style={{ borderColor: "rgba(255,255,255,0.08)", background: "#090e1a" }}
+        initial={{ opacity: 0, y: 28 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, delay: 0.42 }}
       >
-        <div className="flex items-center justify-center gap-2 border-b border-border/60 bg-muted/40 px-4 py-3 text-sm text-muted-foreground backdrop-blur-sm">
-          <button 
-            onClick={() => setActiveTab("mobile")}
-            className={`flex items-center gap-2 rounded-md px-4 py-1.5 transition-all ${activeTab === "mobile" ? "bg-background text-foreground shadow-sm border border-border/50" : "hover:text-foreground hover:bg-muted/50"}`}
-          >
-            <Smartphone className="h-4 w-4" /> Mobile
-          </button>
-          <button 
-            onClick={() => setActiveTab("web")}
-            className={`flex items-center gap-2 rounded-md px-4 py-1.5 transition-all ${activeTab === "web" ? "bg-background text-foreground shadow-sm border border-border/50" : "hover:text-foreground hover:bg-muted/50"}`}
-          >
-            <Globe className="h-4 w-4" /> Web
-          </button>
-          <button 
-            onClick={() => setActiveTab("ide")}
-            className={`flex items-center gap-2 rounded-md px-4 py-1.5 transition-all ${activeTab === "ide" ? "bg-background text-foreground shadow-sm border border-border/50" : "hover:text-foreground hover:bg-muted/50"}`}
-          >
-            <Layout className="h-4 w-4" /> IDE
-          </button>
+        {/* Tab bar */}
+        <div
+          className="flex items-center gap-1.5 border-b px-4 py-2.5"
+          style={{ borderColor: "rgba(255,255,255,0.07)", background: "rgba(255,255,255,0.02)" }}
+        >
+          {(["mobile", "web", "ide"] as Tab[]).map((tab) => {
+            const Icon = tab === "mobile" ? Smartphone : tab === "web" ? Globe : Layout
+            const active = activeTab === tab
+            return (
+              <button key={tab} onClick={() => setActiveTab(tab)}
+                className="flex items-center gap-1.5 rounded-md px-3 py-1.5 text-xs capitalize transition-colors"
+                style={{
+                  background: active ? "rgba(255,255,255,0.06)" : "transparent",
+                  border: active ? "1px solid rgba(255,255,255,0.09)" : "1px solid transparent",
+                  color: active ? "#e2e8f0" : "#475569",
+                }}>
+                <Icon className="h-3.5 w-3.5" />{tab.charAt(0).toUpperCase() + tab.slice(1)}
+              </button>
+            )
+          })}
         </div>
-        
-        <div className="relative aspect-[16/10] bg-[#0a0a0a] overflow-hidden">
+
+        {/* Preview area */}
+        <div className="relative aspect-[16/10] overflow-hidden bg-[#060810]">
           <AnimatePresence mode="wait">
+
+            {/* Mobile */}
             {activeTab === "mobile" && (
-              <motion.div 
-                key="mobile"
-                initial={{ opacity: 0, scale: 0.98 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.98 }}
-                transition={{ duration: 0.2 }}
+              <motion.div key="mobile"
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                transition={{ duration: 0.18 }}
                 className="absolute inset-0 flex items-center justify-center p-8"
               >
-                <div className="h-full w-[320px] rounded-[2rem] border-[6px] border-gray-800 bg-black p-4 shadow-2xl relative overflow-hidden flex flex-col">
-                  <div className="absolute top-0 left-1/2 h-4 w-32 -translate-x-1/2 rounded-b-xl bg-gray-800" />
-                  <div className="mt-6 font-mono text-xs text-gray-300 flex-1 overflow-y-auto pb-12">
-                    <div className="flex items-center gap-2 text-blue-400">
-                      <span className="text-green-400">➜</span>
-                      <span className="text-blue-400">~</span>
-                      <span className="text-gray-300">cloudcli add-auth-middleware</span>
+                <div className="relative flex h-full w-[300px] flex-col overflow-hidden rounded-[1.75rem] border-[5px] border-[#1e2235] bg-[#080b14] shadow-2xl">
+                  <div className="absolute left-1/2 top-0 h-4 w-28 -translate-x-1/2 rounded-b-xl bg-[#1e2235]" />
+                  <div className="mt-5 flex-1 overflow-y-auto p-4 pb-14 font-mono text-[11px]">
+                    <div className="flex items-center gap-1.5" style={{ color: "#60a5fa" }}>
+                      <span style={{ color: "#4ade80" }}>➜</span>
+                      <span style={{ color: "#60a5fa" }}>~</span>
+                      <span style={{ color: "#e2e8f0" }}>cloudcli add-auth-middleware</span>
                     </div>
-                    <div className="mt-4 space-y-1">
-                      <div className="text-gray-400">Creating auth middleware...</div>
-                      <div className="text-blue-300">src/</div>
-                      <div className="pl-4 text-blue-300">middleware/</div>
-                      <div className="pl-8 text-green-400">auth.ts <span className="text-gray-500">(new)</span></div>
-                      <div className="pl-8 text-gray-400">rateLimit.ts</div>
-                      <div className="pl-4 text-blue-300">routes/</div>
-                      <div className="pl-8 text-yellow-400">api.ts <span className="text-gray-500">(modified)</span></div>
-                      <div className="pl-8 text-gray-400">users.ts</div>
-                      <div className="mt-4 text-green-400">✓ Successfully added auth middleware</div>
+                    <div className="mt-3 space-y-1" style={{ color: "#64748b" }}>
+                      <div>Creating auth middleware...</div>
+                      <div style={{ color: "#93c5fd" }}>src/</div>
+                      <div className="pl-4" style={{ color: "#93c5fd" }}>middleware/</div>
+                      <div className="pl-8" style={{ color: "#4ade80" }}>auth.ts <span style={{ color: "#475569" }}>(new)</span></div>
+                      <div className="pl-8">rateLimit.ts</div>
+                      <div className="pl-4" style={{ color: "#93c5fd" }}>routes/</div>
+                      <div className="pl-8" style={{ color: "#fbbf24" }}>api.ts <span style={{ color: "#475569" }}>(modified)</span></div>
+                      <div className="pl-8">users.ts</div>
+                      <div className="mt-3" style={{ color: "#4ade80" }}>✓ Successfully added auth middleware</div>
                     </div>
                   </div>
-                  <div className="absolute bottom-4 left-4 right-4 flex items-center gap-2 rounded-md border border-gray-800 bg-gray-900/80 px-3 py-2 text-xs text-gray-500 backdrop-blur-sm">
+                  <div className="absolute bottom-3 left-3 right-3 flex items-center gap-2 rounded-lg border border-white/[0.07] bg-white/[0.03] px-3 py-2 text-[11px]" style={{ color: "#334155" }}>
                     Message agent...
                   </div>
                 </div>
               </motion.div>
             )}
 
+            {/* Web */}
             {activeTab === "web" && (
-              <motion.div 
-                key="web"
-                initial={{ opacity: 0, scale: 0.98 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.98 }}
-                transition={{ duration: 0.2 }}
-                className="absolute inset-0 p-4 sm:p-8"
+              <motion.div key="web"
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                transition={{ duration: 0.18 }}
+                className="absolute inset-0 p-5 sm:p-8"
               >
-                <div className="h-full w-full rounded-lg border border-gray-800 bg-[#0f111a] shadow-2xl flex flex-col overflow-hidden">
-                  <div className="flex h-10 items-center gap-2 border-b border-gray-800 bg-[#0a0c10] px-4">
+                <div className="flex h-full w-full flex-col overflow-hidden rounded-lg border border-white/[0.07] shadow-2xl" style={{ background: "#0d1017" }}>
+                  {/* Browser chrome */}
+                  <div className="flex h-9 items-center gap-2 border-b border-white/[0.06] bg-[#080b10] px-3">
                     <div className="flex gap-1.5">
-                      <div className="h-3 w-3 rounded-full bg-red-500/80" />
-                      <div className="h-3 w-3 rounded-full bg-yellow-500/80" />
-                      <div className="h-3 w-3 rounded-full bg-green-500/80" />
+                      <div className="h-2.5 w-2.5 rounded-full bg-red-500/70" />
+                      <div className="h-2.5 w-2.5 rounded-full bg-yellow-500/70" />
+                      <div className="h-2.5 w-2.5 rounded-full bg-green-500/70" />
                     </div>
-                    <div className="mx-auto flex h-6 w-1/2 items-center justify-center rounded bg-gray-800/50 text-[10px] text-gray-400">
-                      <Lock className="mr-1 h-3 w-3" /> workspace.cloudcli.dev
+                    <div className="mx-auto flex h-5 w-2/5 items-center justify-center gap-1 rounded border border-white/[0.06] bg-white/[0.03] text-[10px]" style={{ color: "#475569" }}>
+                      <Lock className="h-2.5 w-2.5" />workspace.cloudcli.dev
                     </div>
                   </div>
-                  <div className="flex flex-1">
-                    <div className="w-48 border-r border-gray-800 bg-[#0a0c10] p-4 font-mono text-[10px] text-gray-400">
-                      <div className="mb-2 font-semibold text-gray-300 uppercase tracking-wider">Explorer</div>
+                  <div className="flex flex-1 overflow-hidden">
+                    {/* Sidebar */}
+                    <div className="w-40 shrink-0 border-r border-white/[0.06] bg-[#080b10] p-3 font-mono text-[9px]" style={{ color: "#475569" }}>
+                      <div className="mb-2 text-[9px] font-semibold uppercase tracking-widest" style={{ color: "#334155" }}>Explorer</div>
                       <div className="space-y-1.5">
-                        <div className="text-blue-300">src/</div>
-                        <div className="pl-2 text-blue-300">components/</div>
-                        <div className="pl-4">button.tsx</div>
-                        <div className="pl-4 text-green-400">hero.tsx *</div>
-                        <div className="pl-2 text-blue-300">lib/</div>
-                        <div className="pl-4">utils.ts</div>
+                        <div style={{ color: "#93c5fd" }}>src/</div>
+                        <div className="pl-3" style={{ color: "#93c5fd" }}>components/</div>
+                        <div className="pl-6">button.tsx</div>
+                        <div className="pl-6" style={{ color: "#4ade80" }}>hero.tsx *</div>
+                        <div className="pl-3" style={{ color: "#93c5fd" }}>lib/</div>
+                        <div className="pl-6">utils.ts</div>
                         <div>package.json</div>
                       </div>
                     </div>
-                    <div className="flex-1 p-4 font-mono text-xs text-gray-300 overflow-y-auto">
-                      <div className="text-gray-500 mb-2">{`// src/components/hero.tsx`}</div>
-                      <div><span className="text-pink-500">import</span> {'{'} <span className="text-blue-300">motion</span> {'}'} <span className="text-pink-500">from</span> <span className="text-green-300">&quot;motion/react&quot;</span></div>
-                      <div className="mt-2"><span className="text-pink-500">export function</span> <span className="text-blue-400">Hero</span>() {'{'}</div>
-                      <div className="pl-4"><span className="text-pink-500">return</span> (</div>
-                      <div className="pl-8 text-gray-400">&lt;<span className="text-blue-300">section</span> <span className="text-blue-200">className</span>=<span className="text-green-300">&quot;container mx-auto&quot;</span>&gt;</div>
-                      <div className="pl-12 text-gray-400">&lt;<span className="text-blue-300">motion.h1</span></div>
-                      <div className="pl-16 text-gray-400"><span className="text-blue-200">initial</span>={'{'}{'{'} <span className="text-blue-200">opacity</span>: <span className="text-orange-300">0</span>, <span className="text-blue-200">y</span>: <span className="text-orange-300">20</span> {'}'}{'}'}</div>
-                      <div className="pl-16 text-gray-400"><span className="text-blue-200">animate</span>={'{'}{'{'} <span className="text-blue-200">opacity</span>: <span className="text-orange-300">1</span>, <span className="text-blue-200">y</span>: <span className="text-orange-300">0</span> {'}'}{'}'}</div>
-                      <div className="pl-12 text-gray-400">&gt;</div>
-                      <div className="pl-16 text-foreground">Enterprise Ready</div>
-                      <div className="pl-12 text-gray-400">&lt;/<span className="text-blue-300">motion.h1</span>&gt;</div>
-                      <div className="pl-8 text-gray-400">&lt;/<span className="text-blue-300">section</span>&gt;</div>
+                    {/* Editor */}
+                    <div className="flex-1 overflow-y-auto p-4 font-mono text-xs leading-relaxed" style={{ color: "#94a3b8" }}>
+                      <div className="mb-2" style={{ color: "#334155" }}>{`// src/components/hero.tsx`}</div>
+                      <div><span style={{ color: "#c084fc" }}>import</span>{" {"} <span style={{ color: "#93c5fd" }}>motion</span> {"}"} <span style={{ color: "#c084fc" }}>from</span> <span style={{ color: "#86efac" }}>&quot;motion/react&quot;</span></div>
+                      <div className="mt-2"><span style={{ color: "#c084fc" }}>export function</span> <span style={{ color: "#60a5fa" }}>Hero</span>() {"{"}</div>
+                      <div className="pl-4"><span style={{ color: "#c084fc" }}>return</span> (</div>
+                      <div className="pl-8">&lt;<span style={{ color: "#93c5fd" }}>motion.h1</span></div>
+                      <div className="pl-12"><span style={{ color: "#93c5fd" }}>initial</span>={"{{"} <span style={{ color: "#93c5fd" }}>opacity</span>: <span style={{ color: "#fb923c" }}>0</span> {"}}"}</div>
+                      <div className="pl-12"><span style={{ color: "#93c5fd" }}>animate</span>={"{{"} <span style={{ color: "#93c5fd" }}>opacity</span>: <span style={{ color: "#fb923c" }}>1</span> {"}}"}</div>
+                      <div className="pl-8">&gt;</div>
+                      <div className="pl-12" style={{ color: "#e2e8f0" }}>Enterprise Ready</div>
+                      <div className="pl-8">&lt;/<span style={{ color: "#93c5fd" }}>motion.h1</span>&gt;</div>
                       <div className="pl-4">)</div>
-                      <div>{'}'}</div>
+                      <div>{"}"}</div>
                     </div>
                   </div>
                 </div>
               </motion.div>
             )}
 
+            {/* IDE */}
             {activeTab === "ide" && (
-              <motion.div 
-                key="ide"
-                initial={{ opacity: 0, scale: 0.98 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.98 }}
-                transition={{ duration: 0.2 }}
-                className="absolute inset-0 p-4 sm:p-8"
+              <motion.div key="ide"
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                transition={{ duration: 0.18 }}
+                className="absolute inset-0 p-5 sm:p-8"
               >
-                <div className="h-full w-full rounded-lg border border-gray-800 bg-[#1e1e1e] shadow-2xl flex flex-col overflow-hidden">
-                  <div className="flex h-8 items-center justify-between bg-[#323233] px-4 text-[11px] text-gray-300">
-                    <div className="flex gap-4">
-                      <span>File</span><span>Edit</span><span>Selection</span><span>View</span><span>Go</span><span>Run</span><span>Terminal</span>
+                <div className="flex h-full w-full flex-col overflow-hidden rounded-lg border border-white/[0.06] shadow-2xl" style={{ background: "#1e1e1e" }}>
+                  {/* Menu bar */}
+                  <div className="flex h-7 items-center justify-between bg-[#2d2d2d] px-4 text-[10px]" style={{ color: "#9ca3af" }}>
+                    <div className="flex gap-3">
+                      {["File","Edit","View","Go","Run","Terminal"].map(m => <span key={m}>{m}</span>)}
                     </div>
-                    <div className="flex items-center gap-2 bg-blue-600 px-2 py-0.5 rounded text-white font-medium">
-                      <Globe className="h-3 w-3" /> CloudCLI: Connected
+                    <div className="flex items-center gap-1.5 rounded bg-blue-600/90 px-2 py-0.5 text-white">
+                      <Globe className="h-2.5 w-2.5" />CloudCLI: Connected
                     </div>
                   </div>
-                  <div className="flex flex-1">
-                    <div className="w-12 border-r border-[#333] bg-[#333] flex flex-col items-center py-4 gap-6 text-gray-400">
-                      <Layout className="h-5 w-5 text-white" />
-                      <Terminal className="h-5 w-5" />
-                      <ShieldCheck className="h-5 w-5" />
+                  <div className="flex flex-1 overflow-hidden">
+                    {/* Activity bar */}
+                    <div className="flex w-10 flex-col items-center gap-5 border-r border-white/[0.06] bg-[#2d2d2d] py-4" style={{ color: "#64748b" }}>
+                      <Layout className="h-4 w-4 text-white" />
+                      <Terminal className="h-4 w-4" />
+                      <ShieldCheck className="h-4 w-4" />
                     </div>
-                    <div className="flex-1 flex flex-col">
-                      <div className="flex h-9 bg-[#252526] border-b border-[#333]">
-                        <div className="flex items-center gap-2 bg-[#1e1e1e] px-4 text-[11px] text-white border-t-2 border-blue-500">
-                          <span className="text-green-400">M</span> server.ts
+                    <div className="flex flex-1 flex-col overflow-hidden">
+                      {/* Tab */}
+                      <div className="flex h-8 border-b border-white/[0.06] bg-[#252526]">
+                        <div className="flex items-center gap-2 border-t-2 border-blue-500 bg-[#1e1e1e] px-4 text-[11px]" style={{ color: "#e2e8f0" }}>
+                          <span style={{ color: "#4ade80" }}>M</span> server.ts
                         </div>
                       </div>
-                      <div className="flex-1 p-4 font-mono text-[13px] text-[#d4d4d4] leading-relaxed overflow-y-auto">
-                        <div><span className="text-[#c586c0]">import</span> {'{'} <span className="text-[#9cdcfe]">CloudCLI</span> {'}'} <span className="text-[#c586c0]">from</span> <span className="text-[#ce9178]">&apos;@cloudcli/sdk&apos;</span>;</div>
-                        <br/>
-                        <div><span className="text-[#569cd6]">const</span> <span className="text-[#4fc1ff]">client</span> = <span className="text-[#569cd6]">new</span> <span className="text-[#4ec9b0]">CloudCLI</span>({'{'}</div>
-                        <div className="pl-4"><span className="text-[#9cdcfe]">environment</span>: <span className="text-[#ce9178]">&apos;production&apos;</span>,</div>
-                        <div className="pl-4"><span className="text-[#9cdcfe]">securityLevel</span>: <span className="text-[#ce9178]">&apos;enterprise&apos;</span>,</div>
-                        <div className="pl-4"><span className="text-[#9cdcfe]">compliance</span>: [<span className="text-[#ce9178]">&apos;soc2&apos;</span>, <span className="text-[#ce9178]">&apos;hipaa&apos;</span>]</div>
-                        <div>{'}'});</div>
-                        <br/>
-                        <div className="text-[#6a9955]">{`// Agent is actively monitoring the environment`}</div>
-                        <div><span className="text-[#4fc1ff]">client</span>.<span className="text-[#dcdcaa]">startAgent</span>();</div>
+                      {/* Code */}
+                      <div className="flex-1 overflow-y-auto p-4 font-mono text-[12px] leading-relaxed" style={{ color: "#d4d4d4" }}>
+                        <div><span style={{ color: "#c586c0" }}>import</span>{" {"} <span style={{ color: "#9cdcfe" }}>CloudCLI</span> {"}"} <span style={{ color: "#c586c0" }}>from</span> <span style={{ color: "#ce9178" }}>&apos;@cloudcli/sdk&apos;</span>;</div>
+                        <br />
+                        <div><span style={{ color: "#569cd6" }}>const</span> <span style={{ color: "#4fc1ff" }}>client</span> = <span style={{ color: "#569cd6" }}>new</span> <span style={{ color: "#4ec9b0" }}>CloudCLI</span>{"({"}</div>
+                        <div className="pl-4"><span style={{ color: "#9cdcfe" }}>environment</span>: <span style={{ color: "#ce9178" }}>&apos;production&apos;</span>,</div>
+                        <div className="pl-4"><span style={{ color: "#9cdcfe" }}>securityLevel</span>: <span style={{ color: "#ce9178" }}>&apos;enterprise&apos;</span>,</div>
+                        <div className="pl-4"><span style={{ color: "#9cdcfe" }}>compliance</span>: [<span style={{ color: "#ce9178" }}>&apos;soc2&apos;</span>, <span style={{ color: "#ce9178" }}>&apos;hipaa&apos;</span>]</div>
+                        <div>{"});"}</div>
+                        <br />
+                        <div style={{ color: "#6a9955" }}>{`// Agent is actively monitoring`}</div>
+                        <div><span style={{ color: "#4fc1ff" }}>client</span>.<span style={{ color: "#dcdcaa" }}>startAgent</span>();</div>
                       </div>
-                      <div className="h-48 border-t border-[#333] bg-[#1e1e1e] p-2 font-mono text-[11px] flex flex-col">
-                        <div className="flex gap-4 text-gray-400 mb-2 px-2 shrink-0">
-                          <span className="text-white border-b border-white pb-1">TERMINAL</span>
+                      {/* Terminal */}
+                      <div className="flex h-36 flex-col border-t border-white/[0.06] bg-[#1e1e1e] p-3 font-mono text-[10px]">
+                        <div className="mb-2 flex gap-4" style={{ color: "#64748b" }}>
+                          <span className="border-b border-white pb-1" style={{ color: "#e2e8f0" }}>TERMINAL</span>
                           <span>OUTPUT</span>
-                          <span>DEBUG CONSOLE</span>
+                          <span>DEBUG</span>
                         </div>
-                        <div className="px-2 text-gray-300 flex-1 overflow-y-auto">
-                          <span className="text-green-400">cloudcli@enterprise-node</span>:<span className="text-blue-400">~/workspace</span>$ npm run build<br/>
-                          <span className="text-gray-500">&gt; building for production...</span><br/>
-                          <span className="text-green-400">✓ Compiled successfully in 2.4s</span>
+                        <div style={{ color: "#9ca3af" }}>
+                          <span style={{ color: "#4ade80" }}>cloudcli@enterprise</span>:<span style={{ color: "#60a5fa" }}>~/workspace</span>$ npm run build<br />
+                          <span style={{ color: "#475569" }}>&gt; building for production...</span><br />
+                          <span style={{ color: "#4ade80" }}>✓ Compiled successfully in 2.4s</span>
                         </div>
                       </div>
                     </div>
@@ -255,6 +271,7 @@ export function Hero() {
                 </div>
               </motion.div>
             )}
+
           </AnimatePresence>
         </div>
       </motion.div>

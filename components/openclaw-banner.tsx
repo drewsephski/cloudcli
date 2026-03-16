@@ -1,110 +1,123 @@
 "use client"
 
 import { motion } from "motion/react"
-import { Badge } from "./ui/badge"
-import { Button } from "./ui/button"
-import { ArrowRight, Zap, Shield, Star } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { ArrowRight, Clock, Terminal, Star, CheckCircle2, Lock, Globe } from "lucide-react"
 import Link from "next/link"
+
+function ProgressBar() {
+  return (
+    <div className="h-[3px] w-full overflow-hidden rounded-full" style={{ background: "rgba(255,255,255,0.05)" }}>
+      <motion.div
+        className="h-full rounded-full"
+        style={{ background: "linear-gradient(90deg,#3b82f6,#6366f1)" }}
+        initial={{ width: 0 }}
+        whileInView={{ width: "71.3%" }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+      />
+    </div>
+  )
+}
 
 export function OpenClawBanner() {
   return (
-    <motion.section 
-      className="py-16"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: 0.3 }}
+    <motion.section
+      className="py-8"
+      style={{ fontFamily: "'DM Sans', sans-serif" }}
+      initial={{ opacity: 0, y: 14 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.48 }}
     >
-      <div className="container mx-auto max-w-screen-xl px-4">
-        <div className="relative overflow-hidden rounded-2xl border border-border/60 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 p-8 md:p-12 backdrop-blur-sm">
-          {/* Background gradient effect */}
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 via-purple-600/5 to-pink-600/5" />
-          
-          {/* Content */}
-          <div className="relative z-10 mx-auto max-w-4xl text-center">
-            {/* Featured badge */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="mb-6"
-            >
-              <Badge variant="secondary" className="gap-2 px-4 py-2 text-sm font-medium border-blue-500/30 bg-blue-500/10 text-blue-300">
-                <Zap className="h-4 w-4" />
-                NEW FEATURE
-              </Badge>
-            </motion.div>
+      <div className="container mx-auto max-w-screen-xl px-5">
+        <div className="relative overflow-hidden rounded-xl border" style={{ background: "#090e1a", borderColor: "rgba(255,255,255,0.07)" }}>
 
-            {/* Main headline */}
-            <motion.h2 
-              className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-            >
-              Now Integrated with{" "}
-              <span className="bg-gradient-to-r from-orange-400 to-red-500 bg-clip-text text-transparent">
-                OpenClaw Hosting
-              </span>
-            </motion.h2>
+          {/* top shimmer */}
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-500/35 to-transparent" />
+          {/* inner glow */}
+          <div className="pointer-events-none absolute left-0 top-0 h-52 w-72 rounded-full"
+            style={{ background: "radial-gradient(ellipse at 0% 0%, rgba(37,99,235,0.08) 0%, transparent 70%)" }} />
 
-            {/* Description */}
-            <motion.p 
-              className="mb-8 text-lg text-muted-foreground sm:text-xl max-w-2xl mx-auto"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-            >
-              Get your own OpenClaw instance for just $3.99/month. Full terminal access, no setup required, and live in 60 seconds.
-            </motion.p>
+          <div className="relative z-10 grid grid-cols-1 items-center gap-7 px-7 py-7 lg:grid-cols-[1fr_auto] lg:gap-10">
 
-            {/* Feature highlights */}
-            <motion.div 
-              className="mb-8 flex flex-wrap justify-center gap-4 text-sm"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.7 }}
-            >
-              <div className="flex items-center gap-2 rounded-full border border-border/50 bg-secondary/30 px-4 py-2">
-                <Shield className="h-4 w-4 text-green-500" />
-                <span className="text-foreground">287 spots left at $3.99/mo</span>
+            {/* Left */}
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center gap-2.5">
+                <div className="flex items-center gap-1.5 rounded-md border border-blue-500/20 bg-blue-500/8 px-2.5 py-1 text-[11px] text-blue-300">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-400 opacity-70" />
+                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-blue-400" />
+                  </span>
+                  Limited founding batch
+                </div>
+                <span className="hidden text-xs sm:block" style={{ color: "#334155" }}>Price locks the moment you subscribe</span>
               </div>
-              <div className="flex items-center gap-2 rounded-full border border-border/50 bg-secondary/30 px-4 py-2">
-                <Star className="h-4 w-4 text-yellow-500" />
-                <span className="text-foreground">Limited time pricing</span>
-              </div>
-            </motion.div>
 
-            {/* CTA buttons */}
-            <motion.div 
-              className="flex flex-col gap-4 sm:flex-row sm:items-center justify-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.8 }}
-            >
-              <Link href="/openclaw">
-                <Button size="lg" className="gap-2 rounded-full px-8 shadow-lg shadow-blue-500/25 transition-all hover:shadow-blue-500/40 hover:-translate-y-0.5 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
-                  Claim Your $3.99/mo Spot <ArrowRight className="h-4 w-4" />
+              <div>
+                <h2 className="font-syne mb-1.5 text-xl font-bold tracking-[-0.025em] sm:text-2xl" style={{ color: "#f8fafc" }}>
+                  Run OpenClaw on your own instance.{" "}
+                  <span className="bg-gradient-to-r from-blue-400 to-indigo-400 bg-clip-text text-transparent">$3.99/mo.</span>
+                </h2>
+                <p className="max-w-lg text-sm leading-relaxed" style={{ color: "#64748b" }}>
+                  Full terminal access, every AI provider pre-connected, live in under 60 seconds — no setup, no DevOps, no surprises.
+                </p>
+              </div>
+
+              <div className="max-w-[260px] space-y-1.5">
+                <ProgressBar />
+                <div className="flex items-center justify-between text-[11px]" style={{ color: "#475569" }}>
+                  <span><span style={{ color: "#94a3b8" }} className="font-medium">287 spots</span> left at $3.99/mo</span>
+                  <span>Then $9.99/mo</span>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap gap-x-4 gap-y-1.5">
+                {["Cancel anytime", "Money-back guarantee", "Instant setup"].map((label) => (
+                  <div key={label} className="flex items-center gap-1.5 text-[11px]" style={{ color: "#475569" }}>
+                    <CheckCircle2 className="h-3 w-3 text-blue-400 shrink-0" />{label}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right */}
+            <div className="flex shrink-0 flex-col gap-3 lg:items-end">
+              <div className="flex gap-2.5 lg:flex-col">
+                {[
+                  { icon: <Terminal className="h-3.5 w-3.5 text-blue-400" />, value: "~58 sec", sub: "Avg. setup time" },
+                  { icon: <Star     className="h-3.5 w-3.5 text-indigo-400" />, value: "4.9 / 5", sub: "Member rating" },
+                ].map((s) => (
+                  <div key={s.sub}
+                    className="flex flex-1 items-center gap-3 rounded-lg border px-4 py-3 lg:flex-none lg:min-w-[152px]"
+                    style={{ borderColor: "rgba(255,255,255,0.07)", background: "rgba(255,255,255,0.025)" }}>
+                    <div className="rounded-md border p-1.5" style={{ borderColor: "rgba(255,255,255,0.07)", background: "rgba(255,255,255,0.03)" }}>
+                      {s.icon}
+                    </div>
+                    <div>
+                      <p className="text-[11px]" style={{ color: "#475569" }}>{s.sub}</p>
+                      <p className="font-syne text-sm font-bold tracking-tight" style={{ color: "#f8fafc" }}>{s.value}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <Link href="/openclaw" className="w-full lg:w-auto">
+                <Button size="default"
+                  className="w-full gap-2 rounded-md border-0 px-7 text-sm font-medium text-white transition-opacity hover:opacity-90 lg:w-auto"
+                  style={{ background: "linear-gradient(135deg,#2563eb,#4f46e5)" }}>
+                  Claim $3.99/mo spot <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
-              <Button size="lg" variant="outline" className="gap-2 rounded-full px-8 border-border/60 hover:bg-secondary/50">
-                Learn More
-              </Button>
-            </motion.div>
 
-            {/* Small trust indicator */}
-            <motion.p 
-              className="mt-6 text-xs text-muted-foreground"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.9 }}
-            >
-              Cancel anytime • Shared infrastructure • Money-back guarantee
-            </motion.p>
+              <p className="flex items-center gap-1.5 text-[11px] lg:justify-end" style={{ color: "#334155" }}>
+                <Clock className="h-3 w-3" />After this batch: $9.99/mo
+              </p>
+            </div>
           </div>
 
-          {/* Decorative elements */}
-          <div className="absolute top-4 right-4 h-20 w-20 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 blur-xl" />
-          <div className="absolute bottom-4 left-4 h-16 w-16 rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 blur-xl" />
+          {/* bottom accent */}
+          <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-indigo-500/20 to-transparent" />
         </div>
       </div>
     </motion.section>

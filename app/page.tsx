@@ -1,22 +1,20 @@
-import { Navbar } from "@/components/navbar"
-import { Hero } from "@/components/hero"
+import { Navbar }         from "@/components/navbar"
+import { Hero }           from "@/components/hero"
 import { OpenClawBanner } from "@/components/openclaw-banner"
-import { OpenClawPage } from "@/components/openclaw-page"
-import { Integrations } from "@/components/integrations"
-import { HowItWorks } from "@/components/how-it-works"
-import { Features } from "@/components/features"
-import { Pricing } from "@/components/pricing"
-import { CTA } from "@/components/cta"
-import { Footer } from "@/components/footer"
+import { Integrations }   from "@/components/integrations"
+import { HowItWorks }     from "@/components/how-it-works"
+import { Features }       from "@/components/features"
+import { Pricing }        from "@/components/pricing"
+import { CTA }            from "@/components/cta"
+import { Footer }         from "@/components/footer"
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col bg-background text-foreground">
+    <div className="flex min-h-screen flex-col" style={{ background: "#02040a", color: "#f8fafc" }}>
       <Navbar />
       <main className="flex-1">
         <Hero />
         <OpenClawBanner />
-        <OpenClawPage />
         <Integrations />
         <HowItWorks />
         <Features />
